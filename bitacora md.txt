@@ -126,3 +126,43 @@ Si la persona de taquilla ingresa `0` o un número negativo (por ejemplo, `-2`),
         Salida: Las instrucciones Escribir (muestran en pantalla el recorrido, el valor total, el anticipo y el saldo pendiente).
 
     **Rectángulos:** Representan los bloques de Proceso (operaciones aritméticas y de asignación mediante el operador <-, tales como el cálculo de valorTotal, la función de redondeo redon() para el anticipo, y la resta para hallar el saldo).
+    
+
+## Descomposición del Problema 
+
+Antes de escribir el código, descomponemos el problema en una secuencia lógica de cálculos, especificando los datos de entrada que requiere cada paso:
+
+1. Cálculo del Alquiler de Bicicletas:
+Datos de entrada: Cantidad de bicicletas, horas de alquiler y tarifa por hora de la bicicleta urbana ($10.000).
+Cálculo: valorAlquiler <- cantBicicletas * horas * 10000
+
+2. Cálculo del Recorrido del Grupo:
+Datos de entrada: Precio del recorrido por persona y cantidad de personas del grupo.
+Cálculo: valorRecorrido <- precioRecorrido * cantPersonas
+
+3. Cálculo del Subtotal:
+Datos de entrada: valorAlquiler y valorRecorrido.
+Cálculo: subtotal <- valorAlquiler + valorRecorrido
+
+4. Cálculo del Aporte Voluntario (10%):
+Datos de entrada: subtotal.
+Cálculo: aporteVoluntario <- subtotal * 0.10
+
+5. Cálculo del Total General:
+Datos de entrada: subtotal y aporteVoluntario.
+Cálculo: totalGeneral <- subtotal + aporteVoluntario
+
+6. Cálculo del Valor por Persona (Redondeado hacia arriba a la centena):
+Datos de entrada: totalGeneral y cantPersonas.
+Cálculo previo (exacto): valorPorPersonaExacto <- totalGeneral / cantPersonasFórmula de redondeo hacia arriba a la centena: valorPorPersona <- trunc((valorPorPersonaExacto + 99) / 100) * 1002. 
+
+## Explicación de la Fórmula de Redondeo hacia Arriba a la Centena 
+
+Para cumplir con el requisito de la dueña de redondear hacia arriba a la centena (por ejemplo, que $33.334 se convierta en $33.400 para facilitar el cambio en efectivo), no podemos usar simplemente la función estándar redon() de PSeInt, ya que esta redondea al entero más cercano (hacia arriba o hacia abajo según los decimales).La fórmula matemática implementada es:$$\text{valorPorPersona} = \text{trunc}\left(\frac{\text{valorExacto} + 99}{100}\right) \times 100$$
+
+**¿Cómo funciona?**
+
+1. Se le suma 99 al valor exacto por persona. Esto asegura que cualquier residuo superior a cero que rebase una centena completa "empuje" la cifra hacia la siguiente centena antes de cortar los decimales. 
+2. Se divide entre 100 para desplazar el punto decimal y dejar las centenas en la posición de las unidades. 
+3. Se aplica la función trunc(), la cual elimina por completo cualquier parte decimal restante (siempre hacia abajo, pero como ya sumamos el margen superior, el efecto neto es un redondeo estricto hacia arriba).
+4. Se multiplica nuevamente por 100 para devolver la cifra a su escala real de centenas exactas (múltiplos de 100).
