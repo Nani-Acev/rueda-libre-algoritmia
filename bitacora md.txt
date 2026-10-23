@@ -1,52 +1,98 @@
---- Pasos para alquilar una bicicleta en Rueda Libre ---
+# Bitácora de Desarrollo · Rueda Libre
 
+## 1. Versión 1 del Algoritmo
 
-1. Versión 1 del Algoritmo 
-
-1. Inicio: El cliente llega al mostrador de Rueda Libre.
+1. **Inicio:** El cliente llega al mostrador de Rueda Libre.
 2. Se le pregunta al cliente qué tipo de alquiler desea (por horas o por día).
 3. Se le pide el documento de identidad.
 4. Se verifica que haya bicicletas disponibles.
 5. Se cobra el valor correspondiente.
 6. Se entrega la bicicleta, el casco y el candado.
-7. FIn: El cliente sale del local con todo.
+7. **Fin:** El cliente sale del local con todo.
 
+---
 
-2. Versión 2 del Algoritmo 
+## 2. Registro de Ambigüedades (Prueba Literal)
 
-1. Inicio: El cliente se acerca al punto de atención de Rueda Libre.
+Durante el intercambio con el compañero, se identificaron los siguientes puntos críticos al seguir las instrucciones literalmente:
+
+* **Paso 3 vs. Paso 4:** Se pide el documento de identidad antes de verificar si hay disponibilidad. Si no hay bicicletas, se retiene el documento innecesariamente.
+* **Paso 5 (Cobro):** No especifica los medios de pago aceptados ni en qué momento se emite el comprobante.
+* **Paso 6 (Entrega de equipo):** No se define la talla ni la revisión previa del estado físico de la bicicleta antes de entregarla al usuario.
+
+---
+
+## 3. Versión 2 del Algoritmo (Corregida y Estructurada)
+
+1. **Inicio:** El cliente se acerca al punto de atención de Rueda Libre.
 2. Saludar al cliente y preguntar el tipo de servicio requerido (alquiler por horas, alquiler por día o rutas guiadas).
 3. Consultar el inventario para verificar la disponibilidad del servicio seleccionado.
-4. ¿Hay disponibilidad?
-    Si la respuesta es NO: Informar al cliente amablemente que no hay disponibilidad en este momento, sugerir consultar rutas alternativas o regresar más tarde.
-    Si la respuesta es SÍ: Continuar al paso 5.
+4. **¿Hay disponibilidad?**
+   * **Si la respuesta es NO:** Informar al cliente amablemente que no hay disponibilidad en este momento, sugerir consultar rutas alternativas o regresar más tarde, y **finalizar el proceso**.
+   * **Si la respuesta es SÍ:** Continuar al paso 5.
 5. Solicitar al cliente su documento de identidad original y un medio de contacto (teléfono o correo electrónico).
 6. Seleccionar una bicicleta adecuada en buen estado según los requerimientos del cliente.
 7. Calcular la tarifa total correspondiente al tiempo de alquiler seleccionado, informar el valor total al cliente y solicitar el pago (recibir efectivo o procesar pago con tarjeta).
-9. Registrar la transacción y entregar el recibo de pago junto con el documento de identidad.
-10. Revisar el estado de los implementos y entregar los elementos de seguridad obligatorios.
-12. Salida del cliente del establecimiento con la bicicleta, el casco y el candado.
-13. Fin: El cliente sale del local con su equipo completo.
+8. Registrar la transacción y entregar el recibo de pago junto con el documento de identidad.
+9. Revisar el estado de los implementos y entregar los elementos de seguridad obligatorios (casco y candado).
+10. Permitir la salida del cliente del establecimiento con la bicicleta, el casco y el candado.
+11. **Fin:** El cliente sale del local con su equipo completo.
 
+---
 
-3. Análisis de las Características del Algoritmo
+## 4. Análisis de las Características del Algoritmo
 
-Precisión: Cada instrucción describe de forma clara la acción que debe realizar el personal, sin dejar lugar a interpretaciones ambiguas. Ejemplo: En el paso 7 se detalla con precisión la acción financiera: "Calcular la tarifa total correspondiente al tiempo de alquiler seleccionado, informar el valor total al cliente y solicitar el pago (recibir efectivo o procesar pago con tarjeta)".
+* **Precisión:** Cada instrucción describe de forma clara la acción que debe realizar el personal, sin dejar lugar a interpretaciones ambiguas. 
+  * *Ejemplo:* En el paso 7 se detalla con precisión la acción financiera: *"Calcular la tarifa total correspondiente al tiempo de alquiler seleccionado, informar el valor total al cliente y solicitar el pago (recibir efectivo o procesar pago con tarjeta)"*.
 
-Finitud: El algoritmo cuenta con una cantidad limitada de pasos y siempre llega a un desenlace claro y determinado, sin importar el camino tomado. Ejemplo: El flujo llega claramente al fin del proceso tanto en el caso negativo (si no hay disponibilidad, se informa y se detiene) como en el caso exitoso, donde finaliza en el paso 13 cuando "El cliente sale del local con su equipo completo".
+* **Finitud:** El algoritmo cuenta con una cantidad limitada de pasos y siempre llega a un desenlace claro y determinado, sin importar el camino tomado. 
+  * *Ejemplo:* El flujo llega claramente al fin del proceso tanto en el caso negativo (paso 4: si no hay disponibilidad, se informa y se detiene) como en el caso exitoso (paso 11: *"El cliente sale del local con su equipo completo"*).
 
-Orden: Las operaciones se estructuran bajo una secuencia lógica y cronológica estricta para que la operación no falle en la práctica diaria. Ejemplo: Es indispensable consultar la disponibilidad (pasos 3 y 4) antes de solicitar documentos o calcular tarifas, y realizar el cobro (paso 7) antes de hacer la entrega definitiva de la bicicleta y los implementos de seguridad (pasos 10 y 12).
+* **Orden:** Las operaciones se estructuran bajo una secuencia lógica y cronológica estricta para que la operación no falle en la práctica diaria. 
+  * *Ejemplo:* Es indispensable consultar la disponibilidad (pasos 3 y 4) antes de solicitar documentos o calcular tarifas, y realizar el cobro (paso 7) antes de hacer la entrega definitiva de la bicicleta y los implementos de seguridad (pasos 9 y 10).
 
-Determinismo: Ante unas mismas condiciones de entrada y siguiendo las instrucciones al pie de la letra, el camino lógico y el resultado final serán siempre exactamente iguales. Ejemplo: Si un cliente solicita un servicio que cuenta con inventario disponible, el algoritmo siempre guiará al empleado por la misma ruta estricta: saludar, verificar inventario, solicitar datos, calcular tarifa, cobrar, registrar transacción, revisar implementos y permitir la salida.
+* **Determinismo:** Ante unas mismas condiciones de entrada y siguiendo las instrucciones al pie de la letra, el camino lógico y el resultado final serán siempre exactamente iguales. 
+  * *Ejemplo:* Si un cliente solicita un servicio que cuenta con inventario disponible, el algoritmo siempre guiará al empleado por la misma ruta estricta: saludar, verificar inventario, solicitar datos, calcular tarifa, cobrar, registrar transacción, revisar implementos y permitir la salida.
 
+* **Efectividad:** Todas las acciones descritas son realizables y operativas utilizando los recursos cotidianos del punto de atención. 
+  * *Ejemplo:* Tareas como *"Revisar el estado de los implementos y entregar los elementos de seguridad obligatorios"* (paso 9) son completamente viables de llevar a cabo por cualquier empleado en taquilla.
 
-4. Los Cuatro Pilares del Pensamiento Computacional aplicados a Rueda Libre
+---
 
-Descomposición: Consiste en fragmentar el proceso global de atención y alquiler en etapas o micro-tareas manejables y ordenadas: desde el saludo inicial y la consulta de inventario, pasando por la validación de identidad y el cobro, hasta la revisión de implementos y la salida final.
+## 5. Los Cuatro Pilares del Pensamiento Computacional aplicados a Rueda Libre
 
-Reconocimiento de Patrones: Se identifica que cada interacción con un cliente sigue una estructura repetitiva y estandarizada (Recepción de solicitud $\rightarrow$ Validación de recursos $\rightarrow$ Transacción $\rightarrow$ Entrega de bienes), lo que permite que cualquier empleado replique el mismo método sin alterar la calidad del servicio.
+* **Descomposición:** Consiste en fragmentar el proceso global de atención y alquiler en etapas o micro-tareas manejables y ordenadas: desde el saludo inicial y la consulta de inventario, pasando por la validación de identidad y el cobro, hasta la revisión de implementos y la salida final.
 
-Abstracción: Se descartan y omiten todos los detalles secundarios que no afectan la operación central del negocio (como las características físicas de la ropa del cliente, el estado del clima o conversaciones casuales), enfocándose únicamente en las reglas lógicas del alquiler.
+* **Reconocimiento de Patrones:** Se identifica que cada interacción con un cliente sigue una estructura repetitiva y estandarizada (Recepción de solicitud $\rightarrow$ Validación de recursos $\rightarrow$ Transacción $\rightarrow$ Entrega de bienes), lo que permite que cualquier empleado replique el mismo método sin alterar la calidad del servicio.
 
-Diseño de Algoritmos: Es el resultado estructurado que se observa en tu Versión 2: un conjunto secuencial y condicional de pasos claros que indican el orden exacto de las decisiones y acciones necesarias para que el alquiler de la bicicleta transcurra sin ambigüedades.
+* **Abstracción:** Se descartan y omiten todos los detalles secundarios que no afectan la operación central del negocio (como las características físicas de la ropa del cliente, el estado del clima o conversaciones casuales), enfocándose únicamente en las reglas lógicas del alquiler.
 
+* **Diseño de Algoritmos:** Es el resultado estructurado que se observa en la **Versión 2**: un conjunto secuencial y condicional de pasos claros que indican el orden exacto de las decisiones y acciones necesarias para que el alquiler de la bicicleta transcurra sin ambigüedades.
+
+---
+
+### Tabla de Entrada, Proceso y Salida 
+
+| Entrada (Datos leídos y tipo) | Proceso (Cálculos realizados) | Salida (Mensaje mostrado) |
+| --- | --- | --- |
+| `nombreCliente` (Caracter)<br>
+
+<br>`horasAlquiler` (Entero)<br>
+
+<br>`precioPorHora` (Constante/Entero: 10000) | `totalPagar <- horasAlquiler * precioPorHora` | "Hola, [nombreCliente]: tu alquiler de [horasAlquiler] horas cuesta $[totalPagar]" |
+
+---
+
+### Casos de Prueba 
+
+| Caso de Prueba | Entrada (`horasAlquiler`) | Resultado Esperado (Calculado a mano) | Resultado Obtenido en PSeInt |
+| --- | --- | --- | --- |
+| **Caso 1** | 1 hora | $10.000 | Coincide ($10.000) |
+| **Caso 2** | 3 horas | $30.000 | Coincide ($30.000) |
+| **Caso 3** | 8 horas | $80.000 | Coincide ($80.000) |
+
+---
+
+### Nota sobre valores en 0 o negativos (Pendiente para la Semana 2)
+
+Si la persona de taquilla ingresa `0` o un número negativo (por ejemplo, `-2`), el algoritmo actual realiza la multiplicación aritmética de forma directa (`-2 * 10000 = -20000`), mostrando un resultado ilógico ("...cuesta $-20000") o cobrando cero. Este problema de validación de datos se resolverá en la **Semana 2** incorporando estructuras condicionales (`Si-Entonces`) para restringir el ingreso exclusivo de números enteros positivos.
