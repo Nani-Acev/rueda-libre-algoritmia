@@ -96,3 +96,33 @@ Durante el intercambio con el compañero, se identificaron los siguientes puntos
 ### Nota sobre valores en 0 o negativos (Pendiente para la Semana 2)
 
 Si la persona de taquilla ingresa `0` o un número negativo (por ejemplo, `-2`), el algoritmo actual realiza la multiplicación aritmética de forma directa (`-2 * 10000 = -20000`), mostrando un resultado ilógico ("...cuesta $-20000") o cobrando cero. Este problema de validación de datos se resolverá en la **Semana 2** incorporando estructuras condicionales (`Si-Entonces`) para restringir el ingreso exclusivo de números enteros positivos.
+
+---
+
+## Prueba de Escritorio (MiniReto 3)
+
+**Caso:** 4 personas para el recorrido *Sabores de Barrio* (Precio por persona: $60.000)
+
+| Instrucción / Línea ejecutada | `nombreRecorrido` | `precioPersona` | `cantPersonas` | `valorTotal` | `anticipo` | `saldo` |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| **Inicio de variables** | *Sin definir* | *Sin definir* | *Sin definir* | *Sin definir* | *Sin definir* | *Sin definir* |
+| `Leer nombreRecorrido` | "Sabores de Barrio" | *Sin definir* | *Sin definir* | *Sin definir* | *Sin definir* | *Sin definir* |
+| `Leer precioPersona` | "Sabores de Barrio" | 60000 | *Sin definir* | *Sin definir* | *Sin definir* | *Sin definir* |
+| `Leer cantPersonas` | "Sabores de Barrio" | 60000 | 4 | *Sin definir* | *Sin definir* | *Sin definir* |
+| `valorTotal <- precioPersona * cantPersonas` | "Sabores de Barrio" | 60000 | 4 | 240000 | *Sin definir* | *Sin definir* |
+| `anticipo <- redon(valorTotal * 0.30)` | "Sabores de Barrio" | 60000 | 4 | 240000 | 72000 | *Sin definir* |
+| `saldo <- valorTotal - anticipo` | "Sabores de Barrio" | 60000 | 4 | 240000 | 72000 | 168000 |
+| **Escribir resultados (Salida)** | "Sabores de Barrio" | 60000 | 4 | 240000 | 72000 | 168000 |
+
+
+## Identificación de Símbolos en el Diagrama 600
+
+    **Óvalos:** Representan el Inicio y el Fin del algoritmo (Algoritmo cotizacion_recorrido y FinAlgoritmo).
+
+    **Paralelogramos:** Corresponden a las operaciones de Entrada y Salida de información:
+
+        Entrada: Las instrucciones Leer (capturan el nombre del recorrido, precio por persona y cantidad de personas).
+
+        Salida: Las instrucciones Escribir (muestran en pantalla el recorrido, el valor total, el anticipo y el saldo pendiente).
+
+    **Rectángulos:** Representan los bloques de Proceso (operaciones aritméticas y de asignación mediante el operador <-, tales como el cálculo de valorTotal, la función de redondeo redon() para el anticipo, y la resta para hallar el saldo).
